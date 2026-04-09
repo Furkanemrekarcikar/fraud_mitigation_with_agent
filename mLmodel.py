@@ -36,17 +36,16 @@ if __name__ == "__main__":
     df = pd.read_csv("creditcard.csv")
 
 
-    # Büyük harfli isimleri küçük harflere ve kendi standartlarımıza çeviriyoruz.
+
     df = df.rename(columns={
         "Amount": "amount",
         "Class": "label",
         "Time": "timestamp"
     })
 
-    # Kaggle'daki saniye cinsinden zamanı, senin dt.hour fonksiyonunun anlayacağı formata çeviriyoruz.
+
     df['timestamp'] = pd.to_datetime(df['timestamp'], unit='s')
 
-    # Şimdi eğitim başlıyor!
     df = feature_engineering(df)
     model = train_model(df)
     print("Model eğitildi ve kaydedildi.")
